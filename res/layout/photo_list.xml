@@ -1,0 +1,176 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.5"
+        android:background="#F0EAE1" >
+
+        <RelativeLayout
+            android:id="@+id/pl_relat"
+            android:layout_width="43dp"
+            android:layout_height="fill_parent" >
+
+            <Button
+                android:id="@+id/pl_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_home_select" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/pl_ima1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/pl_relat"
+            android:src="@drawable/line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/pl_ima1" >
+
+            <TextView
+                android:id="@+id/pl_attribute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:textColor="#8E6345"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@id/pl_attribute"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/pl_ima2"
+                    android:layout_width="15dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/icon_home_current" />
+
+                <TextView
+                    android:id="@+id/pl_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#8E6345"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="@drawable/repeat_bg" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/shadow_top" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/shadow_bottom" />
+
+        <GridView
+            android:id="@+id/pl_grid"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="5dp"
+            android:columnWidth="100dp"
+            android:gravity="center"
+            android:horizontalSpacing="10dp"
+            android:numColumns="3"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp" >
+        </GridView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.2"
+        android:background="#F0EAE1" >
+
+        <RelativeLayout
+            android:id="@+id/vl_bottom1"
+            android:layout_width="62dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true" >
+
+            <Button
+                android:id="@+id/pl_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_back_select" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/vl_bottom1" >
+
+            <ImageView
+                android:id="@+id/nv_ima1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/line" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/vl_bottom2"
+            android:layout_width="62dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true" >
+
+            <Button
+                android:id="@+id/pl_add"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_words_select"
+                android:text="@string/addphoto"
+                android:textColor="#8E6345"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/vl_bottom2" >
+
+            <ImageView
+                android:id="@+id/nv_ima2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/line" >
+            </ImageView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/pl_camera"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_photo_select"
+            android:padding="3dp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  
+   <RelativeLayout
+    android:background="#F0EAE1"
+    android:layout_height="70px"
+    android:layout_width="fill_parent">
+    
+
+    <RelativeLayout 
+    android:id="@+id/nv_relat"
+    android:layout_width="85px"
+    android:layout_height="fill_parent">
+    <Button 
+    android:id="@id/nv_home"
+    android:background="@drawable/button_home_select"
+    android:layout_centerInParent="true"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"/>
+    </RelativeLayout>
+    
+    <ImageView 
+    android:layout_toRightOf="@id/nv_relat"
+    android:id="@+id/nv_ima1"
+    android:layout_marginLeft="2px"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:src="@drawable/line"/>
+    
+    <ImageView 
+    android:src="@drawable/icon_new_album"
+    android:layout_toRightOf="@id/nv_ima1"
+    android:layout_marginLeft="20px"
+    android:layout_marginTop="5px"
+    android:id="@+id/vr_ima2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    
+    <TextView 
+    android:text="修改相册信息"
+    android:textSize="20sp"
+    android:textColor="#8E6345"
+    android:layout_toRightOf="@id/vr_ima2"
+    android:layout_centerInParent="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    
+    </RelativeLayout>
+    <RelativeLayout
+    android:layout_weight="1.0"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:background="@drawable/repeat_bg">
+    <ImageView 
+    android:layout_alignParentTop="true"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/shadow_top"/>
+     <ImageView 
+    android:layout_alignParentBottom="true"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/shadow_bottom"/>
+    
+    <TextView 
+    android:id="@+id/nv_tv1"
+    android:layout_marginTop="90px"
+    android:layout_marginLeft="50px"
+    android:text="@string/new_time"
+    android:textSize="30sp"
+    android:textColor="#8E6345"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    
+    <TextView 
+    android:layout_below="@id/nv_tv1"
+    android:id="@+id/nv_time"
+    android:layout_marginTop="30px"
+    android:layout_marginLeft="50px"
+    android:text="XXXX.XX.XX XX:XX"
+    android:textSize="30sp"
+    android:textColor="#8E6345"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    
+    <TextView 
+    android:layout_below="@id/nv_time"
+    android:id="@+id/nv_tv3"
+    android:layout_marginTop="60px"
+    android:layout_marginLeft="50px"
+    android:text="相册名称:"
+    android:textSize="30sp"
+    android:textColor="#8E6345"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <EditText 
+    android:id="@+id/vr_edit"
+    android:layout_below="@id/nv_tv3"
+    android:layout_marginLeft="50px"
+    android:layout_marginRight="50px"
+    android:layout_marginTop="36px"
+    android:maxLength="9"
+    android:lines="1"
+    android:textSize="28sp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"/>
+    
+    </RelativeLayout>
+    
+    <Button 
+    android:id="@+id/vr_rename"
+    android:text="修改"
+    android:textSize="30sp"
+    android:textColor="#8E6345"
+    android:gravity="center"
+    android:background="@drawable/button_bg_select"
+    android:layout_width="fill_parent"
+    android:layout_height="124px"/>
+    
+    
+</LinearLayout>

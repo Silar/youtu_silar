@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.5"
+        android:background="#F0EAE1" >
+
+        <RelativeLayout
+            android:id="@+id/vl_relat"
+            android:layout_width="43dp"
+            android:layout_height="fill_parent" >
+
+            <Button
+                android:id="@+id/pr_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_home_select" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/nv_ima1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/vl_relat"
+            android:src="@drawable/line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/nv_ima1" >
+
+            <TextView
+                android:id="@+id/pr_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:textColor="#8E6345"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@id/pr_time"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/nv_ima2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_photo" />
+
+                <TextView
+                    android:id="@+id/pr_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:maxLength="9"
+                    android:text="@string/photo_name"
+                    android:textColor="#8E6345"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="@drawable/repeat_bg" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/shadow_top" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/shadow_bottom" />
+
+        <com.youtu.NewGallery
+            android:id="@+id/ps_ga"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:spacing="5dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.2"
+        android:background="#F0EAE1" >
+
+        <RelativeLayout
+            android:id="@+id/pr_relat1"
+            android:layout_width="60dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true" >
+
+            <Button
+                android:id="@+id/pr_back"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_back_select" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/pr_liner1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/pr_relat1" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pr_liner2"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/pr_liner1" >
+
+            <Button
+                android:id="@+id/pr_share"
+                android:layout_width="78dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/button_words_select"
+                android:gravity="center"
+                android:text="@string/share"
+                android:textColor="#8E6345"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pr_liner3"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/pr_liner2" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pr_liner4"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/pr_liner3" >
+
+            <Button
+                android:id="@+id/pr_rename"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/button_words_select"
+                android:gravity="center"
+                android:text="@string/rename"
+                android:textColor="#8E6345"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/vl_bottom2"
+            android:layout_width="78dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true" >
+
+            <Button
+                android:id="@+id/pr_delete"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_words_select"
+                android:text="@string/delete"
+                android:textColor="#8E6345"
+                android:textSize="25sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/vl_bottom2" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/line" >
+            </ImageView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

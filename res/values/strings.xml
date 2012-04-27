@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, YouTuActivity!</string>
+    <string name="app_name">游图</string>
+    <string name="title">—整理您的旅行照片</string>
+    <string name="dangqian">当前游记:</string>
+    <string name="main_null">暂无游记</string>
+    <string name="new_name">创建</string>
+    <string name="new_time">创建时间:</string>
+    <string name="create">新建</string>
+    <string name="modify">修改</string>
+    <string name="more">当有更多游记时,显示在这里</string>
+    <string name="photo_name">照片名字</string>
+    <string name="share">分享</string>
+    <string name="rename">重命名</string>
+    <string name="delete">删除</string>
+    <string name="cencel">取消</string>
+    <string name="lookup">查看游记</string>
+    <string name="add">新建游记</string>
+    <string name="newVisit">新建游记</string>
+    <string name="visitname">游记名称:</string>
+    <string name="input">输入游记名称</string>
+    <string name="visitlist">游记列表</string>
+    <string name="photoinput">照片名字</string>
+    <string name="sure">确定</string>
+    <string name="visitnull">暂无图片</string>
+    <string name="about1">游图v2.0</string>
+    <string name="about2">Copyright@2012 玩客实验室</string>
+    <string name="about3">邮箱:simpleliu91@gmail.com</string>
+    <string name="addphoto">导入</string>
+
+</resources>

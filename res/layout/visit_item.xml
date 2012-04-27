@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/visit_item_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/vi_relat"
+        android:layout_width="102.5dp"
+        android:layout_height="99.5dp"
+        android:background="@drawable/visit_item_select" >
+
+        <ImageView
+            android:id="@+id/vi_img"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="19dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="46dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/no_of_photo" >
+
+            <TextView
+                android:id="@+id/vi_count"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="29dp"
+                android:gravity="center" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/vi_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vi_relat"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="#8E6345"
+        android:textSize="15sp" />
+
+</RelativeLayout>

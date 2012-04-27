@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="@drawable/repeat_bg" >
+
+        <ImageView
+            android:id="@+id/pe_shadow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/shadow_bottom" />
+
+        <RelativeLayout
+            android:id="@+id/pe_relat"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="3dp" >
+
+            <Button
+                android:id="@+id/pe_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_words_select"
+                android:text="@string/sure"
+                android:textColor="#8E6345"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/pe_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@id/pe_sure"
+                android:background="@drawable/line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@id/pe_iv"
+                android:gravity="center"
+                android:padding="3dp" >
+
+                <EditText
+                    android:id="@+id/pe_edit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/photoinput"
+                    android:maxLength="9"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/pe_sha"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/pe_relat"
+            android:src="@drawable/shadow_bottom" />
+
+        <ImageView
+            android:id="@+id/pe_img"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/pe_sha"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5.5"
+        android:background="#F0EAE1"
+        android:gravity="center"
+        android:padding="3dp" >
+
+        <Button
+            android:id="@+id/pe_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_photo_select" />
+    </LinearLayout>
+
+</LinearLayout>

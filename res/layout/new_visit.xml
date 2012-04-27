@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.5"
+        android:background="#F0EAE1" >
+
+        <RelativeLayout
+            android:id="@+id/nv_relat"
+            android:layout_width="42dp"
+            android:layout_height="fill_parent" >
+
+            <Button
+                android:id="@+id/nv_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_home_select" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/nv_ima1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/nv_relat"
+            android:src="@drawable/line" />
+
+        <ImageView
+            android:id="@+id/nv_ima2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/nv_ima1"
+            android:src="@drawable/icon_new_album" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/newVisit"
+            android:textColor="#8E6345"
+            android:textSize="23sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="@drawable/repeat_bg" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/shadow_top" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/shadow_bottom" />
+
+        <TextView
+            android:id="@+id/nv_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/new_time"
+            android:textColor="#8E6345"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/nv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nv_tv1"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:textColor="#8E6345"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/nv_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nv_time"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/visitname"
+            android:textColor="#8E6345"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/nv_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nv_tv3"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="18dp"
+            android:hint="@string/input"
+            android:maxLength="9"
+            android:textSize="28sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4.2"
+        android:background="#F0EAE1" >
+
+        <Button
+            android:id="@+id/nv_cencle"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/button_bg_select"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/cencel"
+            android:textColor="#8E6345"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/nv_cencle"
+            android:background="@drawable/line" />
+
+        <Button
+            android:id="@+id/nv_new"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_bg_select"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/new_name"
+            android:textColor="#8E6345"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="1dp"
+            android:layout_toLeftOf="@id/nv_new"
+            android:background="@drawable/line" />
+    </RelativeLayout>
+
+</LinearLayout>
