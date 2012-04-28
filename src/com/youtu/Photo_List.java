@@ -9,15 +9,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,33 +26,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-/**
- * @author Simple_liu
- * 
- *         照片陈列页面
- * 
- */
+import com.youtu.AsyncImageLoader.ImageCallback;
+
 public class Photo_List extends Activity {
 
 	private Button pl_home, pl_back, pl_add, pl_camera;
 	private TextView pl_name, pl_attribute;
 	private GridView pl_grid;
-	private Bitmap bt, bit;;
 	private String visit_name;
 
-	ArrayList<HashMap<String, Object>> pl_listItem = new ArrayList<HashMap<String, Object>>();
-	HashMap<String, Object> map = new HashMap<String, Object>();
-	// SimpleAdapter listItemAdapter;
-
-	MyAdapter listItemAdapter;
+	private List<ImageAndText> list = new ArrayList<ImageAndText>();
+	GridAdapter listItemAdapter;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,13 +58,13 @@ public class Photo_List extends Activity {
 
 		pl_name = (TextView) findViewById(R.id.pl_name);
 		pl_attribute = (TextView) findViewById(R.id.pl_attribute);
-
 		pl_grid = (GridView) findViewById(R.id.pl_grid);
 
 		// 获取当前存储游记的名字
 		String dataN = "Fname";
 		SharedPreferences sp = getSharedPreferences(dataN, MODE_PRIVATE);
 		final String Fn = sp.getString("Fn", "");
+
 		visit_name = Fn;
 
 		Log.d("Photo_List", Fn);
@@ -105,30 +96,10 @@ public class Photo_List extends Activity {
 					if (mFile.isFile()) {
 						if (new Modify().isJPEG(mFile.toString())) {
 
-							/*
-							 * 利用BitmapFactory.Options.
-							 * inSampleSize方法将文件地址直接转码成bitmap. 压缩图片大小,防止bitmap
-							 * size exceeds VM budget的发生
-							 */
-							BitmapFactory.Options opts = new BitmapFactory.Options();
-							opts.inJustDecodeBounds = true;
-							BitmapFactory.decodeFile(mFile.toString(), opts);
+							// 将图片的地址和图片名字存入list中
+							list.add(new ImageAndText(mFile.toString(), mFile
+									.getName().toString()));
 
-							opts.inSampleSize = new Modify().computeSampleSize(
-									opts, -1, 240 * 320);
-							opts.inJustDecodeBounds = false;
-
-							try {
-								bit = BitmapFactory.decodeFile(
-										mFile.toString(), opts);
-							} catch (OutOfMemoryError err) {
-							}
-
-							// 将图片添加进入listview的item中
-							HashMap<String, Object> map = new HashMap<String, Object>();
-							map.put("ItemImage", bit);
-							map.put("ItemName", mFile.getName().toString());
-							pl_listItem.add(map);
 						}
 					}
 				}
@@ -140,36 +111,7 @@ public class Photo_List extends Activity {
 			}
 		}
 
-		// 生成动态数组，加入数据.
-
-		// // 生成适配器的Item和动态数组对应的元素
-		// listItemAdapter = new SimpleAdapter(this, pl_listItem,// 数据源
-		//
-		// R.layout.photo_item,// ListItem的XML实现
-		// // 动态数组与ImageItem对应的子项
-		// new String[] { "ItemImage" },
-		// // ImageItem的XML文件里面的一个ImageView,两个TextView ID
-		// new int[] { R.id.pi_img });
-
-		// // 在Listview中实现显示图片.
-		// listItemAdapter.setViewBinder(new ViewBinder() {
-		//
-		// @Override
-		// public boolean setViewValue(View view, Object data,
-		// String textRepresentation) {
-		// // TODO Auto-generated method stub
-		// if (view instanceof ImageView && data instanceof Bitmap) {
-		// ImageView iv = (ImageView) view;
-		// iv.setImageBitmap((Bitmap) data);
-		// return true;
-		// } else
-		// return false;
-		// }
-		//
-		// });
-
-		listItemAdapter = new MyAdapter(this);
-		// 添加并且显示
+		listItemAdapter = new GridAdapter(this, pl_grid);
 		pl_grid.setAdapter(listItemAdapter);
 
 		// 点击进入照片查看页面
@@ -180,10 +122,10 @@ public class Photo_List extends Activity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 
-				// 获取对应HashMap的数据内容
-				final HashMap<String, Object> ma = pl_listItem.get(position);
 				// 获取图片对应的名字
-				String name = ma.get("ItemName").toString();
+				ImageAndText text = list.get(position);
+				String name = text.getText();
+
 				Log.d("Photo_List", name);
 
 				Intent photo_rename = new Intent();
@@ -269,20 +211,22 @@ public class Photo_List extends Activity {
 
 	}
 
-	public class MyAdapter extends BaseAdapter {
+	public class GridAdapter extends BaseAdapter {
 
-		// 定义context
 		private Context mContext;
+		private GridView gridView;
+		private AsyncImageLoader asyncImageLoader;
 
-		private MyAdapter(Context c) {
+		public GridAdapter(Context c, GridView gridview1) {
 			mContext = c;
-
+			gridView = gridview1;
+			asyncImageLoader = new AsyncImageLoader();
 		}
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return pl_listItem.size();
+			return list.size();
 		}
 
 		@Override
@@ -295,10 +239,6 @@ public class Photo_List extends Activity {
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
 			return position;
-		}
-
-		public class ViewHolder {
-			ImageView imageview;
 		}
 
 		@Override
@@ -324,10 +264,38 @@ public class Photo_List extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.imageview.setImageBitmap((Bitmap) pl_listItem.get(position)
-					.get("ItemImage"));
+			ImageAndText imageAndText = list.get(position);
+			String imageUrl = imageAndText.getImgUrl();
+			holder.imageview.setTag(imageUrl);
+
+			Drawable cacheImage = asyncImageLoader.loadDrawable(imageUrl,
+					new ImageCallback() {
+
+						@Override
+						public void imageLoaded(Drawable imageDrawable,
+								String imageUrl) {
+							// TODO Auto-generated method stub
+
+							ImageView imageViewByTag = (ImageView) gridView
+									.findViewWithTag(imageUrl);
+
+							if (imageViewByTag != null) {
+								imageViewByTag.setImageDrawable(imageDrawable);
+							}
+
+						}
+					});
+			if (cacheImage == null) {
+				holder.imageview.setImageResource(R.drawable.logo);
+			} else {
+				holder.imageview.setImageDrawable(cacheImage);
+			}
 
 			return convertView;
+		}
+
+		public class ViewHolder {
+			ImageView imageview;
 		}
 
 	}
@@ -399,28 +367,7 @@ public class Photo_List extends Activity {
 					imgIS.close();
 					fos.close();
 
-					/*
-					 * 利用BitmapFactory.Options. inSampleSize方法将文件地址直接转码成bitmap.
-					 * 压缩图片大小,防止bitmap size exceeds VM budget的发生
-					 */
-					BitmapFactory.Options opts = new BitmapFactory.Options();
-					opts.inJustDecodeBounds = true;
-					BitmapFactory.decodeFile(newPath, opts);
-
-					opts.inSampleSize = new Modify().computeSampleSize(opts,
-							-1, 240 * 320);
-					opts.inJustDecodeBounds = false;
-
-					try {
-						bt = BitmapFactory.decodeFile(newPath, opts);
-					} catch (OutOfMemoryError err) {
-					}
-
-					// 将图片添加进入listview的item中
-					HashMap<String, Object> map = new HashMap<String, Object>();
-					map.put("ItemImage", bt);
-					map.put("ItemName", add_name + ".JPEG");
-					pl_listItem.add(map);
+					list.add(new ImageAndText(newPath, add_name + ".JPEG"));
 
 					listItemAdapter.notifyDataSetChanged();
 
@@ -458,4 +405,5 @@ public class Photo_List extends Activity {
 		back.setClass(Photo_List.this, Visit_List.class);
 		startActivity(back);
 	}
+
 }

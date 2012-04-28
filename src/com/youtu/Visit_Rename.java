@@ -91,13 +91,13 @@ public class Visit_Rename extends Activity {
 		time.setText(now_time);
 	}
 
-	// /**
-	// * 写Back键方法，直接返回Visit_List主页面
-	// */
-	// @Override
-	// public void onBackPressed() {
-	// Intent back = new Intent();
-	// back.setClass(Visit_Rename.this, Visit_List.class);
-	// startActivity(back);
-	// }
+	/**
+	 * 写Back键方法，直接返回Visit_List主页面
+	 */
+	@Override
+	public void onBackPressed() {
+		Intent back = new Intent();
+		back.setClass(Visit_Rename.this, Visit_List.class);
+		startActivity(back);
+	}
 }

@@ -3,8 +3,9 @@ package com.youtu;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.List;
 
+import com.youtu.AsyncImageLoader.ImageCallback;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,22 +13,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -35,20 +34,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-/**
- * @author Simple_liu
- * 
- *         游记陈列页面
- * 
- */
 public class Visit_List extends Activity {
 
 	private Button vl_home, vl_back, vl_create;
 	private GridView vl_grid;
-	private Bitmap bt;
-	ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
-	VisitAdapter listItemAdapter;
+	private List<Visit_Help> list = new ArrayList<Visit_Help>();
+	private GridAdapter grid;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,7 +91,9 @@ public class Visit_List extends Activity {
 			}
 		});
 
-		// 获取所有游记信息
+		/*
+		 * 获取所有游记信息
+		 */
 		// 获取游记名字
 		File file = new File("sdcard/YouTu");
 
@@ -131,40 +126,20 @@ public class Visit_List extends Activity {
 						vn = f1.getName().toString();
 					}
 
-					/*
-					 * 利用BitmapFactory.Options.inSampleSize方法将文件地址直接转码成bitmap.
-					 * 防止bitmap size exceeds VM budget的发生
-					 */
-					BitmapFactory.Options opts = new BitmapFactory.Options();
-					opts.inJustDecodeBounds = true;
-					BitmapFactory.decodeFile("sdcard/YouTu/"
-							+ mCurrentFile.getName().toString() + "/" + vn,
-							opts);
+					String path = "sdcard/YouTu/"
+							+ mCurrentFile.getName().toString() + "/" + vn;
 
-					opts.inSampleSize = new Modify().computeSampleSize(opts,
-							-1, 320 * 240);
-					opts.inJustDecodeBounds = false;
+					// 将首张图片的地址,游记的名字,照片的数量存入list中
+					list.add(new Visit_Help(path, mCurrentFile.getName()
+							.toString(), Pcount));
 
-					try {
-						bt = BitmapFactory.decodeFile("sdcard/YouTu/"
-								+ mCurrentFile.getName().toString() + "/" + vn,
-								opts);
-					} catch (OutOfMemoryError err) {
-					}
-
-					HashMap<String, Object> map = new HashMap<String, Object>();
-					if (bt != null) {
-						map.put("ItemImage", bt);
-					}
-					map.put("ItemCount", Pcount);
-					map.put("ItemName", mCurrentFile.getName().toString());
-					listItem.add(map);
 				}
 			}
 
 			// 添加并且显示
-			listItemAdapter = new VisitAdapter(this);
-			vl_grid.setAdapter(listItemAdapter);
+			grid = new GridAdapter(this, vl_grid);
+			vl_grid.setAdapter(grid);
+
 			vl_grid.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -220,7 +195,6 @@ public class Visit_List extends Activity {
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		}
-
 	}
 
 	@Override
@@ -230,10 +204,11 @@ public class Visit_List extends Activity {
 				.getMenuInfo();
 
 		final int pos = Linfo.position;
-		// 获取对应HaspMap的数据内容
-		final HashMap<String, Object> ma = listItem.get(pos);
+
+		Visit_Help visit = list.get(pos);
+
 		// 获取对应相册名字
-		final String str = ma.get("ItemName").toString();
+		final String str = visit.getName().toString();
 
 		// 获取相应游记的地址
 		final String st = "sdcard/YouTu/" + str;
@@ -255,12 +230,12 @@ public class Visit_List extends Activity {
 									// TODO Auto-generated method stub
 
 									// listview删除该Item
-									listItem.remove(pos);
+									list.remove(pos);
 
 									// 到游记地址去删除游记
 									new Modify().delFolder(st);
 									// 更新gridView
-									listItemAdapter.notifyDataSetChanged();
+									grid.notifyDataSetChanged();
 									// 对比Main主页面继续本次旅行后对应的游记名字，如果删除的相册名字和它一样，则也把继续本次旅行后对应的名字删掉
 									// 删除之后，将排在第一行的游记名字保存到“VisitName”中.
 									SharedPreferences sh = getSharedPreferences(
@@ -327,20 +302,22 @@ public class Visit_List extends Activity {
 		return true;
 	}
 
-	public class VisitAdapter extends BaseAdapter {
+	public class GridAdapter extends BaseAdapter {
 
-		// 定义context
 		private Context mContext;
+		private GridView gridView;
+		private AsyncImageLoader asyncImageLoader;
 
-		private VisitAdapter(Context c) {
+		public GridAdapter(Context c, GridView gridview1) {
 			mContext = c;
-
+			gridView = gridview1;
+			asyncImageLoader = new AsyncImageLoader();
 		}
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return listItem.size();
+			return list.size();
 		}
 
 		@Override
@@ -382,13 +359,35 @@ public class Visit_List extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.imageview.setImageBitmap((Bitmap) listItem.get(position)
-					.get("ItemImage"));
+			Visit_Help imageAndText = list.get(position);
+			String path = imageAndText.getPath();
+			holder.imageview.setTag(path);
 
-			holder.count.setText(listItem.get(position).get("ItemCount")
-					.toString());
-			holder.name.setText(listItem.get(position).get("ItemName")
-					.toString());
+			Drawable cacheImage = asyncImageLoader.loadDrawable(path,
+					new ImageCallback() {
+
+						@Override
+						public void imageLoaded(Drawable imageDrawable,
+								String imageUrl) {
+							// TODO Auto-generated method stub
+
+							ImageView imageViewByTag = (ImageView) gridView
+									.findViewWithTag(imageUrl);
+
+							if (imageViewByTag != null) {
+								imageViewByTag.setImageDrawable(imageDrawable);
+							}
+
+						}
+					});
+			if (cacheImage == null) {
+				holder.imageview.setImageResource(R.drawable.logo);
+			} else {
+				holder.imageview.setImageDrawable(cacheImage);
+			}
+
+			holder.name.setText(imageAndText.getName());
+			holder.count.setText(String.valueOf(imageAndText.getCount()));
 
 			return convertView;
 		}
@@ -409,5 +408,4 @@ public class Visit_List extends Activity {
 		back.setClass(Visit_List.this, Main.class);
 		startActivity(back);
 	}
-
 }
