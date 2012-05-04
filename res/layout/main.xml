@@ -97,17 +97,15 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <TextView
+            <Button
                 android:id="@+id/main_blist"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="3dp"
-                android:background="@drawable/blist"
+                android:background="@drawable/blist_sec"
                 android:clickable="false"
-                android:drawableRight="@drawable/icon_droplist"
                 android:gravity="center"
-                android:paddingRight="10dp"
                 android:text="@string/main_null"
                 android:textColor="#545252"
                 android:textSize="18sp" />

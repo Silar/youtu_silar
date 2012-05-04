@@ -90,7 +90,7 @@
             android:layout_alignParentBottom="true"
             android:src="@drawable/shadow_bottom" />
 
-        <com.youtu.NewGallery
+        <com.visit.mx.NewGallery
             android:id="@+id/ps_ga"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
